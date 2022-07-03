@@ -64,6 +64,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'filme.context.filmes_recentes',
+                'filme.context.filmes_alta',
+                'filme.context.filme_destaque',
             ],
         },
     },
@@ -134,6 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 COMPRESS_ROOT = BASE_DIR / 'static'
 
-COMPRESS_ENABLED = True
+# COMPRESS_ENABLED = True
 
-STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
+# STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)

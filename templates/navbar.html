@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="fixed px-1 py-2.5 rounded w-full z-50">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
-        <a href="#" class="flex items-center">
+        <a href="/" class="flex items-center">
             <img src="{% static 'images/hashflix.png' %}" class="mr-3 h-8 sm:h-10" alt="Hashflix Logo">
         </a>
         <button data-collapse-toggle="mobile-menu" type="button"
@@ -23,11 +23,12 @@
             <ul
                 class="flex flex-col bg-zinc-900 rounded-md md:bg-transparent mx-none md:flex-row md:space-x-4 md:text-sm md:font-medium">
                 <li class="flex justify-center py-1 md:py-0">
-                    <a href="#">
-                        <form action="" class="block rounded-md" aria-current="page">
-                            <input type="text" class="py-1 rounded-md text-black" placeholder="Pesquisar...">
-                        </form>
-                    </a>
+                    <form method="get" action="{% url 'filme:pesquisafilme' %}" class="block rounded-md"
+                        aria-current="page">
+                        <input type="text" class="py-1 rounded-md text-black" value="{{ request.GET.query }}"
+                            placeholder="Pesquisar..." name="query">
+                        <input type="submit" value="">
+                    </form>
                 </li>
                 <li class="flex justify-center py-1 md:py-0">
                     <a href="#">
