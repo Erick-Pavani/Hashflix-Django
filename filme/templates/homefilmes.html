@@ -95,7 +95,7 @@ Filmes - Hashflix
         class="h-screen relative bg-no-repeat pb-8 pl-6 flex items-end bg-cover bg-fixed bg-center bg-black bg-opacity-50 bg-blend-overlay"
         style="background-image: url('{{ filme_destaque.thumb.url }}');">
         <div>
-            <h2 class="text-6xl font-semibold text-white my-4">
+            <h2 class="text-4xl sm:text-6xl font-semibold text-white my-4">
                 {{ filme_destaque.titulo }}
             </h2>
             <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
@@ -126,7 +126,7 @@ Filmes - Hashflix
                     {% for filme in lista_filmes_recentes %}
                     {% if forloop.counter < 5 %} <div class="item h-64 w-1/4 m-4">
                         <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                            <img src="{{ filme.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                            <img src="{{ filme.thumb.url }}" class="hover:scale-125 rounded-md w-full h-full object-cover">
                         </a>
             </div>
             {% endif %}
@@ -141,7 +141,7 @@ Filmes - Hashflix
         {% for filme in lista_filmes_recentes %}
         {% if forloop.counter > 4 %} <div class="item h-64 w-1/4 m-4">
             <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                <img src="{{ filme.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                <img src="{{ filme.thumb.url }}" class="hover:scale-125 rounded-md w-full h-full object-cover">
             </a>
         </div>
         {% endif %}
