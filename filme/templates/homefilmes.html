@@ -189,10 +189,46 @@ Filmes - Hashflix
     </section>
     {% endif %}
     </div>
-
-
     </div>
     </section>
-
+    <section class='bg-primary_black flex justify-center py-10'>
+        <div class="p-8 w-10/12 relative">
+            <h2 class="text-gray-200 text-2xl font-medium">
+                Continuar assistindo
+            </h2>
+            <div class="wrapper">
+                <section id="section5" class="flex flex-nowrap items-center justify-center space-x-8">
+                    {% if request.user.filmes_vistos.all|length > 4 %}
+                    <a href="#section6" class="arrow__btn text-6xl page">‹</a>
+                    {% endif %}
+                    {% for filme in request.user.filmes_vistos.all %}
+                    {% if forloop.counter < 5 %} <div class="item h-64 w-1/4 m-4">
+                        <a href="{% url 'filme:detalhesfilme' filme.pk %}">
+                            <img src="{{ filme.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                        </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% if request.user.filmes_vistos.all|length > 4 %}
+            <a href="#section6" class="arrow__btn text-6xl">›</a>
+            {% endif %}
+    </section>
+    {% if request.user.filmes_vistos.all|length > 4 %}
+    <section id="section6" class="flex flex-nowrap items-center justify-center">
+        <a href="#section5" class="arrow__btn text-6xl">‹</a>
+        {% for filme in request.user.filmes_vistos.all %}
+        {% if forloop.counter > 4 %} <div class="item h-64 w-1/4 m-4">
+            <a href="{% url 'filme:detalhesfilme' filme.pk %}">
+                <img src="{{ filme.thumb.url }}" class="rounded-md w-full h-full object-cover">
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <a href="#section5" class="arrow__btn text-6xl">›</a>
+    </section>
+    {% endif %}
+    </div>
+    </div>
+    </section>
 </main>
 {% endblock %}
