@@ -12,7 +12,7 @@ Login - Hashflix
         <form method="post">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Faça Login para continuar</legend>
+                <legend class="border-bottom mb-4">Faça login para continuar</legend>
                 {{ form|crispy }}
             </fieldset>
             <button class="bg-red-600 py-1 my-2 px-3 w-full text-white md:text-lg rounded-md" type="submit">Fazer Login</button>
@@ -24,8 +24,7 @@ Login - Hashflix
 </header>
 
 <footer class=" px-5 py-10 ">
-    <ul class="flex justify-between items-center">
-
+    <ul class="flex justify-between items-center text-xs sm:text-sm">
         <li>&copy; 2022</li>
         <li> Feito com Python (Django)</li>
         <li>

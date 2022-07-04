@@ -8,7 +8,10 @@ Editar Perfil - Hashflix
 
 {% block head %}
 <style>
-    @media screen and  (max-width: 480px){
+    #hint_id_new_password1 {
+        color: lightblue!important;
+    }
+    @media screen and  (max-width: 580px){
         .conta{
             max-width: 80%!important;
         }
@@ -23,12 +26,11 @@ Editar Perfil - Hashflix
         <form method="post" class="conta">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Edite os campos abaixo para editar seu perfil</legend>
+                <legend class="border-bottom mb-4">Edite sua senha abaixo</legend>
                 {{ form|crispy }}
             </fieldset>
             <button class="bg-red-600 py-1 px-3 text-white md:text-lg rounded-md" type="submit">Editar Perfil</button>
         </form>
-        <small class="py-3 text-yellow-300"><a href="{% url 'filme:editarsenha' user.pk %}">Quer mudar sua senha? Clique aqui.</a></small>
     </div>
 </header>
 

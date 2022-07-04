@@ -5,6 +5,15 @@
 Login - Hashflix
 {% endblock %}
 
+{% block head %}
+<style>
+    #id_email {
+        color: black!important;
+        width: 100%!important;    
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <header
     class="min-h-screen min-w-screen bg-black bg-opacity-75 bg-blend-overlay showcase border-gray-600 border-b-8 flex justify-center items-center bg-fixed bg-cover"
@@ -20,12 +29,12 @@ Login - Hashflix
         <h4 class="text-sm md:text-lg pb-3">
             Quer começar? Coloque seu e-mail abaixo para acessar.
         </h4>
-
         <div class="w-full flex justify-center">
             <div class="flex justify-center items-center w-11/12 md:w-10/12">
                 <form method="post" class="justify-center">
+                    {% csrf_token %}
                     <div class="flex flex-grow items-stretch">
-                        <input>
+                        {{ form }}
                         <button
                             class="bg-red-600 font-medium md:font-normal flex justify-center items-center py-2 px-3 md:px-0 rounded-br-sm rounded-tr-sm md:text-2xl"
                             type="submit">
@@ -86,8 +95,7 @@ Login - Hashflix
     </div>
 </section>
 <footer class=" px-5 py-10 ">
-    <ul class="flex justify-between items-center">
-
+    <ul class="flex justify-between items-center text-xs sm:text-sm">
         <li>&copy; 2022</li>
         <li> Feito com Python (Django)</li>
         <li>

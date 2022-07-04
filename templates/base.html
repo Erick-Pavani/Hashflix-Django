@@ -32,10 +32,10 @@
         const nav = document.querySelector('nav')
 
         document.addEventListener("scroll", e => {
-            if (scrollY > 350) {
-                nav.classList.add('bg-black')
+            if (scrollY > 0) {
+                nav.classList.add('backdrop-blur-sm')
             } else {
-                nav.classList.remove('bg-black')
+                nav.classList.remove('backdrop-blur-sm')
             }
         })
     </script>

@@ -1,17 +1,26 @@
-from django.shortcuts import redirect, render
-from.models import Filme
-from django.views.generic import TemplateView, ListView, DetailView
+from django.shortcuts import redirect, render, reverse
+from.models import Filme, Usuario
+from .forms import CriarContaForm, FormHomePage
+from django.views.generic import TemplateView, ListView, DetailView, FormView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-class Homepage(TemplateView):
+class Homepage(FormView):
     template_name = "homepage.html"
+    form_class = FormHomePage
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect("filme:homefilmes")
         return super().get(request, *args, **kwargs)
+    
+    def get_success_url(self):
+        email = self.request.POST.get("email")
+        usuarios = Usuario.objects.filter(email = email)
+        if usuarios:
+            return reverse("filme:login")
+        return reverse("filme:criarconta")
 
 
 class Homefilmes(LoginRequiredMixin, ListView):
@@ -47,8 +56,21 @@ class PesquisaFilme(LoginRequiredMixin, ListView):
             return object_list 
         return None
     
-class EditarPerfil(LoginRequiredMixin, TemplateView):
+class EditarPerfil(LoginRequiredMixin, UpdateView):
     template_name = 'editarperfil.html'
-    
-class CriarConta(TemplateView):
+    model = Usuario
+    fields = ['first_name', 'last_name', 'email']
+
+    def get_success_url(self):
+        return reverse("filme:homefilmes")
+
+class CriarConta(FormView):
     template_name = "criarconta.html"
+    form_class = CriarContaForm
+
+    def get_success_url(self):
+        return reverse('filme:login')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
