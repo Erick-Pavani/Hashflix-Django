@@ -139,12 +139,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-COMPRESS_ROOT = BASE_DIR / 'static'
-
-COMPRESS_ENABLED = True
-
-STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
-
 LOGIN_REDIRECT_URL = 'filme:homefilmes'
 
 LOGIN_url = 'filme:login'
