@@ -26,7 +26,7 @@
                 <li class="flex justify-center py-1 md:py-0">
                     <form method="get" action="{% url 'filme:pesquisafilme' %}" class="block rounded-md"
                         aria-current="page">
-                        <input type="text" class="py-1 rounded-md text-black" value="{{ request.GET.query }}"
+                        <input type="text" class="py-1 mt-1 rounded-md text-black" value="{{ request.GET.query }}"
                             placeholder="Pesquisar..." name="query">
                         <input type="submit" value="">
                     </form>
@@ -51,8 +51,7 @@
         </div>
         {% else %}
         <a href="{% url 'filme:login' %}">
-            <button class="block py-2 pr-4 pl-3 text-white rounded-md md:py-1 md:px-2 bg-red-600"
-                aria-current="page">
+            <button class="block py-2 pr-4 pl-3 text-white rounded-md md:py-1 md:px-2 bg-red-600" aria-current="page">
                 Login
             </button>
         </a>
