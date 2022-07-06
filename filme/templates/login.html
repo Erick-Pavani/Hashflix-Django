@@ -7,7 +7,9 @@ Login - Hashflix
 {% endblock %}
 
 {% block content %}
-<header class="min-h-screen bg-black bg-opacity-75 bg-blend-overlay showcase border-gray-600 border-b-8 flex justify-center items-center bg-center bg-fixed bg-cover"  style="background-image: url('{% static 'images/background_netflix.jpg' %}');">
+<header
+    class="min-h-screen min-w-screen bg-black bg-opacity-75 bg-blend-overlay showcase border-gray-600 border-b-8 flex justify-center items-center bg-center bg-fixed bg-cover"
+    style="background-image: url('{% static 'images/background_netflix.jpg' %}');">
     <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col">
         <form method="post">
             {% csrf_token %}
@@ -15,7 +17,8 @@ Login - Hashflix
                 <legend class="border-bottom mb-4">Faça login para continuar</legend>
                 {{ form|crispy }}
             </fieldset>
-            <button class="bg-red-600 py-1 my-2 px-3 w-full text-white md:text-lg rounded-md" type="submit">Fazer Login</button>
+            <button class="bg-red-600 py-1 my-2 px-3 w-full text-white md:text-lg rounded-md" type="submit">Fazer
+                Login</button>
         </form>
         <small>
             Não tem uma conta ainda? <p><a href="{% url 'filme:criarconta' %}">Clique aqui para criar uma conta</a></p>
