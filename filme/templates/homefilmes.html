@@ -141,7 +141,7 @@ Filmes - Hashflix
         {% for filme in lista_filmes_recentes %}
         {% if forloop.counter > 4 %} <div class="item h-64 w-1/4 m-4">
             <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                <img src="{{ filme.thumb.url }}" class="hover:scale-125 rounded-md w-full h-full object-cover">
+                <img src="{{ filme.thumb.url }}" class="scale-90 hover:scale-100 transition ease-in-out hover:rounded-md rounded-md w-full h-full object-cover">
             </a>
         </div>
         {% endif %}
@@ -165,7 +165,7 @@ Filmes - Hashflix
                     {% for filme in lista_filmes_alta %}
                     {% if forloop.counter < 5 %} <div class="item h-64 w-1/4 m-4">
                         <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                            <img src="{{ filme.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                            <img src="{{ filme.thumb.url }}" class="scale-90 hover:scale-100 transition ease-in-out hover:rounded-md rounded-md w-full h-full object-cover">
                         </a>
             </div>
             {% endif %}
@@ -180,7 +180,7 @@ Filmes - Hashflix
         {% for filme in lista_filmes_alta %}
         {% if forloop.counter > 4 %} <div class="item h-64 w-1/4 m-4">
             <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                <img src="{{ filme.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                <img src="{{ filme.thumb.url }}" class="scale-90 hover:scale-100 transition ease-in-out hover:rounded-md rounded-md w-full h-full object-cover">
             </a>
         </div>
         {% endif %}
@@ -204,7 +204,7 @@ Filmes - Hashflix
                     {% for filme in request.user.filmes_vistos.all %}
                     {% if forloop.counter < 5 %} <div class="item h-64 w-1/4 m-4">
                         <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                            <img src="{{ filme.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                            <img src="{{ filme.thumb.url }}" class="scale-90 hover:scale-100 transition ease-in-out hover:rounded-md rounded-md w-full h-full object-cover">
                         </a>
             </div>
             {% endif %}
@@ -219,7 +219,7 @@ Filmes - Hashflix
         {% for filme in request.user.filmes_vistos.all %}
         {% if forloop.counter > 4 %} <div class="item h-64 w-1/4 m-4">
             <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                <img src="{{ filme.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                <img src="{{ filme.thumb.url }}" class="scale-90 hover:scale-100 transition ease-in-out hover:rounded-md rounded-md w-full h-full object-cover">
             </a>
         </div>
         {% endif %}
