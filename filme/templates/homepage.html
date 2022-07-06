@@ -11,9 +11,14 @@ HomePage - Hashflix
         color: black !important;
         width: 100% !important;
     }
-    .teste{
+    .teste {
         background-image: url('{% static 'images/background_netflix.jpg' %}');
     }
+    @supports (-webkit-touch-callout: none) {
+        .intro {
+        background-attachment: scroll;
+    }
+}
 </style>
 {% endblock %}
 
