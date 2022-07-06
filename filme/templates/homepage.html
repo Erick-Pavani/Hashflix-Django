@@ -9,98 +9,99 @@ HomePage - Hashflix
 <style>
     #id_email {
         color: black !important;
-        width: 100% !important;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<header
-    class="min-h-screen max-w-screen bg-black bg-opacity-75 bg-blend-overlay showcase border-gray-600 border-b-8 flex justify-center items-center bg-center bg-fixed bg-cover"
-    style="background-image: url('{% static 'images/background_netflix.jpg' %}');">
-    <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col">
-        <h1 class="font-semibold text-4xl md:text-5xl w-10/12 md:w-3/4 text-center">
-            Filmes e séries da Hashtag, tudo em um só lugar.
-        </h1>
-        <h3 class="text-xl md:text-xl py-5">
-            Assista onde quiser. Cancele quando quiser.
-        </h3>
-        <h4 class="text-sm md:text-lg pb-3">
-            Quer começar? Coloque seu e-mail abaixo para acessar.
-        </h4>
-        <div class="w-full flex justify-center">
-            <div class="flex justify-center items-center w-11/12 md:w-10/12">
-                <form method="post" class="justify-center">
-                    {% csrf_token %}
-                    <div class="flex flex-grow items-stretch">
-                        {{ form }}
-                        <button
-                            class="bg-red-600 font-medium md:font-normal flex justify-center items-center py-2 px-3 md:px-0 rounded-br-sm rounded-tr-sm md:text-2xl"
-                            type="submit">
-                            <span>
-                                Acessar
-                            </span>
-                            <ion-icon name="chevron-forward-outline" class="text-2xl"></ion-icon>
-                        </button>
-                    </div>
-                </form>
+<div class="absolute inset-0">
+    <header
+        class="min-h-screen max-w-screen bg-black bg-opacity-75 bg-blend-overlay showcase border-gray-600 border-b-8 flex justify-center items-center bg-center bg-fixed bg-cover"
+        style="background-image: url('{% static 'images/background_netflix.jpg' %}');">
+        <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col">
+            <h1 class="font-semibold text-4xl md:text-5xl w-10/12 md:w-3/4 text-center">
+                Filmes e séries da Hashtag, tudo em um só lugar.
+            </h1>
+            <h3 class="text-xl md:text-xl py-5">
+                Assista onde quiser. Cancele quando quiser.
+            </h3>
+            <h4 class="text-sm md:text-lg pb-3">
+                Quer começar? Coloque seu e-mail abaixo para acessar.
+            </h4>
+            <div class="w-full flex justify-center">
+                <div class="flex justify-center items-center w-11/12 md:w-10/12">
+                    <form method="post" class="justify-center">
+                        {% csrf_token %}
+                        <div class="flex flex-grow items-stretch">
+                            {{ form }}
+                            <button
+                                class="bg-red-600 font-medium md:font-normal flex justify-center items-center py-2 px-3 md:px-0 rounded-br-sm rounded-tr-sm md:text-2xl"
+                                type="submit">
+                                <span>
+                                    Acessar
+                                </span>
+                                <ion-icon name="chevron-forward-outline" class="text-2xl"></ion-icon>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 
-<section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
-    <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10 ">
-        <h2 class="md:text-5xl text-4xl font-semibold mb-4">
-            Aproveite na sua TV.
-        </h2>
-        <h5 class="md:text-xl text-lg">
-            Assista em Smart Tvs, Playstation, Xbox, Chrmecast, Apple TV, Blu-ray players, and more.
-        </h5>
-    </div>
-    <div class='md:w-1/2 flex justify-center items-center'>
-        <img src="{% static 'images/tv.png' %}" class="w-8/12" alt="">
-    </div>
-</section>
+    <section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
+        <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10 ">
+            <h2 class="md:text-5xl text-4xl font-semibold mb-4">
+                Aproveite na sua TV.
+            </h2>
+            <h5 class="md:text-xl text-lg">
+                Assista em Smart Tvs, Playstation, Xbox, Chrmecast, Apple TV, Blu-ray players, and more.
+            </h5>
+        </div>
+        <div class='md:w-1/2 flex justify-center items-center'>
+            <img src="{% static 'images/tv.png' %}" class="w-8/12" alt="">
+        </div>
+    </section>
 
-<section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
-    <div class='md:w-1/2 flex justify-center items-center '>
-        <img src="{% static 'images/mobile-0819.jpg' %}" class="w-8/12" alt="">
-    </div>
+    <section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
+        <div class='md:w-1/2 flex justify-center items-center '>
+            <img src="{% static 'images/mobile-0819.jpg' %}" class="w-8/12" alt="">
+        </div>
 
-    <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10">
-        <h2 class="md:text-5xl text-4xl font-semibold mb-4">
-            Baixe suas séries e filmes favoritos para assistir onde quiser.
-        </h2>
-        <h5 class="md:text-xl text-lg">
-            É possível assistir seus downloads até mesmo offline.
-        </h5>
-    </div>
+        <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10">
+            <h2 class="md:text-5xl text-4xl font-semibold mb-4">
+                Baixe suas séries e filmes favoritos para assistir onde quiser.
+            </h2>
+            <h5 class="md:text-xl text-lg">
+                É possível assistir seus downloads até mesmo offline.
+            </h5>
+        </div>
 
-</section>
+    </section>
 
-<section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
-    <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10">
-        <h2 class="md:text-5xl text-4xl font-semibold mb-4">
-            Crie contas para crianças.
-        </h2>
-        <h5 class="md:text-xl text-lg">
-            Garanta que suas crianças tenham uma aventura mágica e sem conteúdos violentos ou impróprios.
-        </h5>
-    </div>
-    <div class='md:w-1/2 flex justify-center items-center'>
-        <img src="{% static 'images/netflix_kid.png' %}" class="w-8/12" alt="">
-    </div>
-</section>
-<footer class=" px-5 py-10 ">
-    <ul class="flex justify-between items-center text-xs sm:text-sm">
-        <li>&copy; 2022</li>
-        <li> Feito com Python (Django)</li>
-        <li>
-            <a href="https://erick-pavani.github.io/">
-                Erick
-            </a>
-        </li>
-    </ul>
-</footer>
+    <section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
+        <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10">
+            <h2 class="md:text-5xl text-4xl font-semibold mb-4">
+                Crie contas para crianças.
+            </h2>
+            <h5 class="md:text-xl text-lg">
+                Garanta que suas crianças tenham uma aventura mágica e sem conteúdos violentos ou impróprios.
+            </h5>
+        </div>
+        <div class='md:w-1/2 flex justify-center items-center'>
+            <img src="{% static 'images/netflix_kid.png' %}" class="w-8/12" alt="">
+        </div>
+    </section>
+    <footer class=" px-5 py-10 ">
+        <ul class="flex justify-between items-center text-xs sm:text-sm">
+            <li>&copy; 2022</li>
+            <li> Feito com Python (Django)</li>
+            <li>
+                <a href="https://erick-pavani.github.io/">
+                    Erick
+                </a>
+            </li>
+        </ul>
+    </footer>
+</div>
 {% endblock %}
