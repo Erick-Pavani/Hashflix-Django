@@ -22,7 +22,12 @@ Login - Hashflix
             </button>
         </form>
         <small>
-            Não tem uma conta ainda? <p><a href="{% url 'filme:criarconta' %}">Clique aqui para criar uma conta</a></p>
+            Não tem uma conta ainda? 
+            <p>
+                <a href="{% url 'filme:criarconta' %}" class="text-yellow-300">
+                    Clique aqui para criar uma conta
+                </a>
+            </p>
         </small>
     </div>
 </header>
