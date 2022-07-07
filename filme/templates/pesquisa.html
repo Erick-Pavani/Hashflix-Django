@@ -4,18 +4,28 @@
 Pesquisa - Hashflix
 {% endblock %}
 
+{% block head %}
+<style>
+@media screen and  (max-width: 400px){
+        .filme {
+            width: 100%!important;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<main class='bg-primary_black min-h-screen w-full'>
-    <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
-        <div class="p-8 w-10/12 relative">
+<main class="min-h-screen w-full">
+    <section class="min-h-screen flex justify-center py-10">
+        <div class="p-8 w-11/12 relative">
             <h2 class="text-gray-200 text-2xl font-medium">
-                Resultados da Busca
+                Resultados da busca
             </h2>
-            <div class="flex flex-wrap items-center min-w-full movie_lis">
+            <div class="flex flex-wrap items-center justify-center min-w-full">
                 {% for filme in object_list %}
-                <div class="m-4 bg-blue-500 overflow-hidden flex-shrink-0 rounded-md cursor-pointer h-64 w-96">
+                <div class="filme m-4 overflow-hidden flex-shrink-0 rounded-md cursor-pointer h-64 w-96">
                     <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                        <img src="{{ filme.thumb.url }}" class="object-cover w-full h-full " alt="">
+                        <img src="{{ filme.thumb.url }}" class="object-cover w-full h-full" alt="">
                     </a>
                 </div>
                 {% endfor %}

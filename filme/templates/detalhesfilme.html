@@ -4,8 +4,18 @@
 {{ object.titulo }} - Hashflix
 {% endblock %}
 
+{% block head %}
+<style>
+@media screen and  (max-width: 400px){
+        .filme {
+            width: 100%!important;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<main class='bg-primary_black min-h-screen w-full'>
+<main class="min-h-screen w-full">
     <section
         class="h-screen relative bg-fixed pb-8 pl-6 flex items-end bg-cover bg-center bg-black bg-opacity-50 bg-blend-overlay"
         style="background-image: url('{{ object.thumb.url }}');">
@@ -18,7 +28,7 @@
             </p>
             <div class="flex my-4">
                 <a href="{{ object.episodios.first.video }}">
-                    <button class="flex items-center bg-white py-2 px-5 rounded-md" style='color:black;'>
+                    <button class="flex items-center bg-white py-2 px-5 rounded-md" style="color:black;">
                         <ion-icon name="play" class="text-2xl"></ion-icon>
                         <span class="ml-3 font-medium">
                             Play
@@ -28,12 +38,12 @@
             </div>
         </div>
     </section>
-    <section class='bg-primary_black flex justify-center py-10'>
+    <section class="bg-primary_black flex justify-center py-10">
         <div class="p-8 w-10/12 relative">
             <h2 class="text-gray-200 text-3xl font-medium">
                 Descrição
             </h2>
-            <div class="flex justify-left  items-center min-w-full  movie_lis">
+            <div class="flex justify-left items-center min-w-full">
                 <p class="text-gray-100 text-lg">
                     {{ object.descricao }}
                     <br>
@@ -50,7 +60,7 @@
                 </h3>
                 {% else %}
                 {% for episodio in object.episodios.all %}
-                <h3 class='text-lg'>
+                <h3 class="text-lg">
                     <a href="{{ episodio.video }}">
                         <p>{{ forloop.counter }} - {{ episodio.titulo }}</p>
                     </a>
@@ -61,16 +71,16 @@
         </div>
     </section>
     {% if filmes_relacionados %}
-    <section class='bg-primary_black flex justify-center py-10'>
+    <section class="flex justify-center py-10">
         <div class="p-8 w-10/12 relative">
             <h2 class="text-gray-200 text-2xl font-medium">
                 Relacionados
             </h2>
-            <div class="flex flex-wrap items-center min-w-full movie_lis">
+            <div class="flex flex-wrap items-center justify-center min-w-full">
                 {% for filme in filmes_relacionados %}
-                <div class="m-4 bg-blue-500 overflow-hidden flex-shrink-0 rounded-md cursor-pointer h-64 w-96">
+                <div class="filme m-4 overflow-hidden flex-shrink-0 rounded-md cursor-pointer h-64 w-96">
                     <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                        <img src="{{ filme.thumb.url }}" class="object-cover w-full h-full " alt="">
+                        <img src="{{ filme.thumb.url }}" class="object-cover w-full h-full" alt="">
                     </a>
                 </div>
                 {% endfor %}
