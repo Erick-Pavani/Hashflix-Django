@@ -25,7 +25,7 @@ Pesquisa - Hashflix
                 {% for filme in object_list %}
                 <div class="filme m-4 overflow-hidden flex-shrink-0 rounded-md cursor-pointer h-64 w-96">
                     <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                        <img src="{{ filme.thumb.url }}" class="object-cover w-full h-full" alt="">
+                        <img src="{{ filme.thumb.url }}" class="hover:scale-110 transition ease-in-out object-cover w-full h-full" alt="">
                     </a>
                 </div>
                 {% endfor %}
