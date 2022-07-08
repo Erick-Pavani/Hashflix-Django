@@ -14,10 +14,10 @@ Um projeto de uma plataforma de filmes e séries inspirada na Netflix.
 ## Funcionalidades do site:
 - Site 100% responsivo
 - Filme de destaque selecionado dinamicamente
-- lista de filmes novos gerada dinamicamente com base na data de adição do filme na plataforma
-- lista de filmes em alta gerada dinamicamente pelo número de vizualizações dos filmes
-- lista de filmes assistidos gerada dinamicamente
-- contabilização de vizualizações dinâmica
+- Lista de filmes novos gerada dinamicamente com base na data de adição do filme na plataforma
+- Lista de filmes em alta gerada dinamicamente pelo número de vizualizações dos filmes
+- Lista de filmes assistidos gerada dinamicamente
+- Contabilização de vizualizações dinâmica
 - Login
 - Logout
 - Edição de Perfil
