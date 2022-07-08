@@ -7,26 +7,160 @@ Filmes - Hashflix
 
 {% block head %}
 <style>
+
+    *,
+    *::after,
+    *::before {
+        box-sizing: border-box;
+    }
+
+    :root {
+        --handle-size: 3rem;
+        --img-gap: .25rem;
+    }
+
     .wrapper {
-        display: grid;
-        grid-template-columns: repeat(3, 100%);
+        display: flex;
+        justify-content: center;
         overflow: hidden;
-        scroll-behavior: smooth;
+        margin: 0;
+        min-width: 100%;
+    }
+
+    .linha {
+        max-width: 100%;
+        min-width: 100%;
+        
+    }
+
+    .slider {
+        --items-per-screen: 4;
+        --slider-index: 0;
+        display: flex;
+        flex-grow: 1;
+        margin: 0 var(--img-gap);
+        transform: translateX(calc(var(--slider-index) * -100%));
+        transition: transform 250ms ease-in-out;
+    }
+
+    .slider > a {
+        flex: 0 0 calc(100% / var(--items-per-screen));
+        max-width: calc(100% / var(--items-per-screen));
+        aspect-ratio: 16 / 9;
+        padding: var(--img-gap);
+        border-radius: 1rem;
+    }
+
+    .handle {
+        border: none;
+        border-radius: 1rem;
+        flex-grow: 0;
+        flex-shrink: 0;
+        background-color: rgba(255, 255, 255, .25);
+        z-index: 10;
+        margin: var(--img-gap) 0;
+        width: var(--handle-size);
+        cursor: pointer;
+        font-size: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        line-height: 0;
+        transition: background-color 150ms ease-in-out;
+        padding-top: 5%;
+        padding-bottom: 5%;
+    }
+
+    .left-handle {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .right-handle {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .handle:hover,
+    .handle:focus {
+        background-color: rgba(255, 255, 255, .5);
+    }
+
+    .text {
+        transition: transform 150ms ease-in-out;
+    }
+
+    .handle:hover .text,
+    .handle:focus .text {
+        transform: scale(1.2);
+    }
+
+    .cabecalho {
+        display: flex;
+        justify-content: space-between;
+        padding: .5rem calc(var(--img-gap) * 2 + var(--handle-size));
+        align-items: center;
+    }
+
+    .title {
+        font-size: 1.4rem;
+        margin: 0;
+    }
+
+    .barra-progresso {
+        display: flex;
+        gap: .25rem;
+    }
+
+    .progress-item {
+        flex: 0 0 1.5rem;
+        min-width: 1.5rem;
+        height: .5rem;
+        background-color: rgba(255, 255, 255, .5);
+    }
+
+    .progress-item.active {
+        background-color: rgba(255, 255, 255, .9);
+    }
+
+    @media (max-width: 1100px) {
+        .slider {
+            --items-per-screen: 3;
+        }
+    }
+
+    @media (max-width: 800px) {
+        .slider {
+            --items-per-screen: 2;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .slider {
+            --items-per-screen: 1;
+        }
+    }
+
+    @media (max-width: 480px){
+        .title {
+            font-size: 1rem;
+        }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<main class='bg-primary_black min-h-screen w-full'>
+<main>
     <section
-        class="h-screen relative bg-no-repeat pb-8 pl-6 flex items-end bg-cover bg-fixed bg-center bg-black bg-opacity-50 bg-blend-overlay"
+        class="h-screen pb-8 pl-6 flex items-end bg-fixed bg-center bg-cover bg-black bg-opacity-50 bg-blend-overlay"
         style="background-image: url('{{ filme_destaque.thumb.url }}');">
         <div>
             <h2 class="text-4xl sm:text-6xl font-semibold text-white my-4">
                 {{ filme_destaque.titulo }}
             </h2>
-            <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
-                {{ filme_destaque.descricao}}
+            <p class="w-11/12 md:w-5/12 font-medium text-white my-4">
+                {{ filme_destaque.descricao }}
             </p>
             <div class="flex my-4">
                 <a href="{% url 'filme:detalhesfilme' filme_destaque.pk %}">
@@ -40,170 +174,179 @@ Filmes - Hashflix
             </div>
         </div>
     </section>
-    <section class="flex justify-center py-10">
-        <div class="p-8 w-12/12 relative">
-            <h2 class="text-gray-200 text-2xl font-medium">
-                Novo
-            </h2>
+    <section class="py-10">
+        <div class="linha">
+            <div class="cabecalho">
+                <h3 class="title">Novo</h3>
+                <div class="barra-progresso"></div>
+            </div>
             <div class="wrapper">
-                <section id="section1" class="flex items-center justify-center">
-                    {% if lista_filmes_recentes|length > 4 %}
-                        <a href="#section2" class=" text-6xl">
-                            ‹
-                        </a>
-                    {% endif %}
+                <button class="handle left-handle">
+                    <div class="text">&#8249;</div>
+                </button>
+                <div class="slider">
                     {% for filme in lista_filmes_recentes %}
-                        {% if not forloop.counter > 4 %} 
-                            <div class="h-64 w-1/4 m-4">
-                                <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                                    <img src="{{ filme.thumb.url }}" class="scale-90 hover:scale-100 transition ease-in-out rounded-md w-full h-full object-cover">
-                                </a>
-                            </div>
-                        {% endif %}
+                        <a href="{% url 'filme:detalhesfilme' filme.pk %}">
+                            <img src="{{ filme.thumb.url }}" class="rounded-md scale-95 hover:scale-105 transition ease-in-out">
+                        </a>  
                     {% endfor %}
-                    {% if lista_filmes_recentes|length > 4 %}
-                        <a href="#section2" class=" text-6xl">
-                            ›
-                        </a>
-                    {% endif %}
-                </section>
-                {% if lista_filmes_recentes|length > 4 %}
-                    <section id="section2" class="flex flex-nowrap items-center justify-center">
-                        <a href="#section1" class=" text-6xl">
-                            ‹
-                        </a>
-                        {% for filme in lista_filmes_recentes %}
-                            {% if forloop.counter > 4 %} 
-                                <div class="h-64 w-1/4 m-4">
-                                    <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                                        <img src="{{ filme.thumb.url }}" class="scale-90 hover:scale-100 transition ease-in-out rounded-md w-full h-full object-cover">
-                                    </a>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                        <a href="#section1" class=" text-6xl">
-                            ›
-                        </a>
-                    </section>
-                {% endif %}
+                </div>
+                <button class="handle right-handle">
+                    <div class="text">&#8250;</div>
+                </button>
             </div>
         </div>
     </section>
-    <section class="flex justify-center py-10">
-        <div class="p-8 w-12/12 relative">
-            <h2 class="text-gray-200 text-2xl font-medium">
-                Em alta
-            </h2>
+    <section class="py-10">
+        <div class="linha">
+            <div class="cabecalho">
+                <h3 class="title">Em alta</h3>
+                <div class="barra-progresso"></div>
+            </div>
             <div class="wrapper">
-                <section id="section3" class="flex flex-nowrap items-center justify-center">
-                    {% if lista_filmes_alta|length > 4 %}
-                        <a href="#section4" class=" text-6xl">
-                            ‹
-                        </a>
-                    {% endif %}
+                <button class="handle left-handle">
+                    <div class="text">&#8249;</div>
+                </button>
+                <div class="slider">
                     {% for filme in lista_filmes_alta %}
-                        {% if not forloop.counter > 4 %} 
-                            <div class="h-64 w-1/4 m-4">
-                                <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                                    <img src="{{ filme.thumb.url }}" class="scale-90 hover:scale-100 transition ease-in-out rounded-md w-full h-full object-cover">
-                                </a>
-                            </div>
-                        {% endif %}
+                        <a href="{% url 'filme:detalhesfilme' filme.pk %}">
+                            <img src="{{ filme.thumb.url }}" class="rounded-md scale-95 hover:scale-105 transition ease-in-out">
+                        </a>  
                     {% endfor %}
-                    {% if lista_filmes_alta|length > 4 %}
-                        <a href="#section4" class=" text-6xl">
-                            ›
-                        </a>
-                    {% endif %}
-                </section>
-                {% if lista_filmes_alta|length > 4 %}
-                    <section id="section4" class="flex flex-nowrap items-center justify-center">
-                        <a href="#section3" class=" text-6xl">
-                            ‹
-                        </a>
-                        {% for filme in lista_filmes_alta %}
-                            {% if forloop.counter > 4 %} 
-                                <div class="h-64 w-1/4 m-4">
-                                    <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                                        <img src="{{ filme.thumb.url }}" class="scale-90 hover:scale-100 transition ease-in-out rounded-md w-full h-full object-cover">
-                                    </a>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                        <a href="#section3" class=" text-6xl">
-                            ›
-                        </a>
-                    </section>
-                {% endif %}
+                </div>
+                <button class="handle right-handle">
+                    <div class="text">&#8250;</div>
+                </button>
             </div>
         </div>
     </section>
-    {% if request.user.filmes_vistos.all|length > 0 %}
-        <section class="flex justify-center py-10">
-            <div class="p-8 w-12/12 relative">
-                <h2 class="text-gray-200 text-2xl font-medium">
-                    Continuar assistindo
-                </h2>
+    {% if request.user.filmes_vistos.all %}
+        <section class="py-10">
+            <div class="linha">
+                <div class="cabecalho">
+                    <h3 class="title">Continuar assistindo</h3>
+                    <div class="barra-progresso">
+                    </div>
+                </div>
                 <div class="wrapper">
-                    <section id="section5" class="flex flex-nowrap items-center justify-center space-x-8">
-                        {% if request.user.filmes_vistos.all|length > 4 %}
-                            <a href="#section6" class=" text-6xl">
-                                ‹
-                            </a>
-                        {% endif %}
+                    <button class="handle left-handle">
+                        <div class="text">&#8249;</div>
+                    </button>
+                    <div class="slider">
                         {% for filme in request.user.filmes_vistos.all %}
-                            {% if not forloop.counter > 4 %} 
-                            <div class="h-64 w-1/4 m-4">
-                                <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                                    <img src="{{ filme.thumb.url }}" class="scale-90 hover:scale-100 transition ease-in-out rounded-md w-full h-full object-cover">
-                                </a>
-                            </div>
-                            {% endif %}
+                            <a href="{% url 'filme:detalhesfilme' filme.pk %}">
+                                <img src="{{ filme.thumb.url }}" class="rounded-md scale-95 hover:scale-105 transition ease-in-out">
+                            </a>  
                         {% endfor %}
-                        {% if request.user.filmes_vistos.all|length > 4 %}
-                            <a href="#section6" class=" text-6xl">
-                                ›
-                            </a>
-                        {% endif %}
-                    </section>
-                    {% if request.user.filmes_vistos.all|length > 4 %}
-                        <section id="section6" class="flex flex-nowrap items-center justify-center">
-                            <a href="#section5" class=" text-6xl">
-                                ‹
-                            </a>
-                            {% for filme in request.user.filmes_vistos.all %}
-                                {% if forloop.counter > 4 %} 
-                                <div class="h-64 w-1/4 m-4">
-                                    <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                                        <img src="{{ filme.thumb.url }}" class="scale-90 hover:scale-100 transition ease-in-out rounded-md w-full h-full object-cover">
-                                    </a>
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                            <a href="#section5" class=" text-6xl">›</a>
-                        </section>
-                    {% endif %}
+                    </div>
+                    <button class="handle right-handle">
+                        <div class="text">&#8250;</div>
+                    </button>
                 </div>
             </div>
         </section>
     {% endif %}
-    <section class="flex justify-center py-10">
-        <div class="p-8 w-12/12">
-            <h2 class="text-gray-200 text-2xl font-medium">
-                Teste
-            </h2>
-            <div class="carousel">
-                <div class="carousel-row">
-                    {% for filme in request.user.filmes_vistos.all %}
-                        <div class="carousel-tile">
-                            <a href="{% url 'filme:detalhesfilme' filme.pk %}">
-                                <img src="{{ filme.thumb.url }}" class="rounded-md w-full h-full object-cover">
-                            </a>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </section>
 </main>
+
+<script>
+    document.addEventListener("click", e => {
+        let handle
+        if (e.target.matches(".handle")) {
+            handle = e.target
+        } else {
+            handle = e.target.closest(".handle")
+        }
+        if (handle != null) onHandleClick(handle)
+    })
+
+    const throttleProgressBar = throttle(() => {
+        document.querySelectorAll(".barra-progresso").forEach(calculateProgressBar)
+    }, 250)
+    window.addEventListener("resize", throttleProgressBar)
+
+    document.querySelectorAll(".barra-progresso").forEach(calculateProgressBar)
+
+    function calculateProgressBar(progressBar) {
+        progressBar.innerHTML = ""
+        const slider = progressBar.closest(".linha").querySelector(".slider")
+        const itemCount = slider.children.length
+        const itemsPerScreen = parseInt(
+            getComputedStyle(slider).getPropertyValue("--items-per-screen")
+        )
+        let sliderIndex = parseInt(
+            getComputedStyle(slider).getPropertyValue("--slider-index")
+        )
+        const progressBarItemCount = Math.ceil(itemCount / itemsPerScreen)
+
+        if (sliderIndex >= progressBarItemCount) {
+            slider.style.setProperty("--slider-index", progressBarItemCount - 1)
+            sliderIndex = progressBarItemCount - 1
+        }
+
+        for (let i = 0; i < progressBarItemCount; i++) {
+            const barItem = document.createElement("div")
+            barItem.classList.add("progress-item")
+            if (i === sliderIndex) {
+                barItem.classList.add("active")
+            }
+            progressBar.append(barItem)
+        }
+    }
+
+    function onHandleClick(handle) {
+        const progressBar = handle.closest(".linha").querySelector(".barra-progresso")
+        const slider = handle.closest(".wrapper").querySelector(".slider")
+        const sliderIndex = parseInt(
+            getComputedStyle(slider).getPropertyValue("--slider-index")
+        )
+        const progressBarItemCount = progressBar.children.length
+        if (handle.classList.contains("left-handle")) {
+            if (sliderIndex - 1 < 0) {
+                slider.style.setProperty("--slider-index", progressBarItemCount - 1)
+                progressBar.children[sliderIndex].classList.remove("active")
+                progressBar.children[progressBarItemCount - 1].classList.add("active")
+            } else {
+                slider.style.setProperty("--slider-index", sliderIndex - 1)
+                progressBar.children[sliderIndex].classList.remove("active")
+                progressBar.children[sliderIndex - 1].classList.add("active")
+            }
+        }
+
+        if (handle.classList.contains("right-handle")) {
+            if (sliderIndex + 1 >= progressBarItemCount) {
+                slider.style.setProperty("--slider-index", 0)
+                progressBar.children[sliderIndex].classList.remove("active")
+                progressBar.children[0].classList.add("active")
+            } else {
+                slider.style.setProperty("--slider-index", sliderIndex + 1)
+                progressBar.children[sliderIndex].classList.remove("active")
+                progressBar.children[sliderIndex + 1].classList.add("active")
+            }
+        }
+    }
+
+    function throttle(cb, delay = 1000) {
+        let shouldWait = false
+        let waitingArgs
+        const timeoutFunc = () => {
+            if (waitingArgs == null) {
+                shouldWait = false
+            } else {
+                cb(...waitingArgs)
+                waitingArgs = null
+                setTimeout(timeoutFunc, delay)
+            }
+        }
+        return (...args) => {
+            if (shouldWait) {
+                waitingArgs = args
+                return
+            }
+            cb(...args)
+            shouldWait = true
+            setTimeout(timeoutFunc, delay)
+        }
+    }
+</script>
+
 {% endblock %}
