@@ -34,7 +34,7 @@ Filmes - Hashflix
     }
 
     .slider {
-        --items-per-screen: 4;
+        --items-per-screen: 3;
         --slider-index: 0;
         display: flex;
         flex-grow: 1;
@@ -124,11 +124,11 @@ Filmes - Hashflix
         background-color: rgba(255, 255, 255, .9);
     }
 
-    @media (max-width: 1100px) {
+    /* @media (max-width: 1100px) {
         .slider {
             --items-per-screen: 3;
         }
-    }
+    } */
 
     @media (max-width: 800px) {
         .slider {
@@ -145,6 +145,10 @@ Filmes - Hashflix
     @media (max-width: 480px){
         .title {
             font-size: 1rem;
+        }
+
+        :root {
+            --handle-size: 1.8rem;
         }
     }
 </style>
